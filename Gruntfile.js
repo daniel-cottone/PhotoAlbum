@@ -71,11 +71,19 @@ module.exports = function (grunt) {
         hostname: 'localhost',
         livereload: 35729
       },
+      proxies: [{
+        context: '/api', // the context of the data service
+        host: 'localhost', // wherever the data service is running
+        port: 8080 // the port that the data service is running on
+      }],
       livereload: {
         options: {
           open: true,
           middleware: function (connect) {
+            var proxy = require('grunt-connect-proxy/lib/utils').proxyRequest;
             return [
+              // Include the proxy first
+              proxy,
               connect.static('.tmp'),
               connect().use(
                 '/bower_components',
@@ -389,6 +397,7 @@ module.exports = function (grunt) {
     }
   });
 
+  grunt.loadNpmTasks('grunt-connect-proxy');
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
@@ -400,6 +409,7 @@ module.exports = function (grunt) {
       'wiredep',
       'concurrent:server',
       'autoprefixer:server',
+      'configureProxies:server',
       'connect:livereload',
       'watch'
     ]);

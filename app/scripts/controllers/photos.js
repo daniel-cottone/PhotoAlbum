@@ -8,10 +8,10 @@
  * Controller of the photoAlbumApp
  */
 angular.module('photoAlbumApp')
-  .controller('PhotosCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('PhotosCtrl', function ($scope, PhotosService) {
+
+    PhotosService.query(function (data) {
+      $scope.photos = data;
+    });
+
   });

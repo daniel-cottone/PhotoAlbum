@@ -54,16 +54,18 @@ angular
         url: '/photos',
         templateUrl: 'views/photos/list.html',
         controller: 'PhotosListCtrl'
-      }).state('viewPhoto', {
+      })
+      .state('viewPhoto', {
         url: '/photos/:id/view',
         templateUrl: 'views/photos/view.html',
         controller: 'PhotosViewCtrl'
-      }).state('editPhotos', {
+      })
+      .state('editPhoto', {
         url: '/photos/:id/edit',
         templateUrl: 'views/photos/edit.html',
         controller: 'PhotosEditCtrl'
       })
-      .state('newPhotos', {
+      .state('newPhoto', {
         url: '/photos/new',
         templateUrl: 'views/photos/new.html',
         controller: 'PhotosNewCtrl'

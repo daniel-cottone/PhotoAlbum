@@ -1,17 +1,13 @@
-<div>
-  
+<div class="container-fluid">
+
   <h3>Details for {{ album.title }}</h3>
 
-  <label>Id:</label>
-  <p>{{ album.id }}</p>
+  <p><strong>Title:</strong> {{ album.title }}</p>
+  <p><strong>Created:</strong> {{ album.createdDate | date: 'MMM d, yyyy' }}</p>
+  <p><strong>Cover photo:</strong> {{ album.coverPhotoId }}</p>
 
-  <label>Title:</label>
-  <p>{{ album.title }}</p>
-
-  <label>Created date:</label>
-  <p>{{ album.createdDate }}</p>
-
-  <label>Cover photo id:</label>
-  <p>{{ album.coverPhotoId }}</p>
+  <div>
+    <a class="btn btn-primary" ui-sref="editAlbum({ id: album.id })">Edit</a>
+  </div>
 
 </div>

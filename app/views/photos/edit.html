@@ -1,5 +1,4 @@
-<div ng-repeat="photo in photos track by $index">
-  <p>
-    {{ photo.title }} - {{ photo.filePath }} - {{ photo.createdDate }}
-  </p>
-</div>
+<h3>Edit {{ photo.title }}</h3>
+<form class="form-horizontal" role="form" ng-submit="updatePhoto()">
+  <div ng-include="'views/photos/_form.html'"></div>
+</form>

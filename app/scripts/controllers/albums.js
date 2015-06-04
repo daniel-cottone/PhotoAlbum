@@ -9,8 +9,14 @@
  */
 angular.module('photoAlbumApp')
 
-  .controller('AlbumsListCtrl', function ($scope, $state, AlbumsService) {
+  .controller('AlbumsListCtrl', function ($scope, $state, $stateParams, AlbumsService) {
     $scope.albums = AlbumsService.query();
+
+    $scope.deleteAlbum = function(album) {
+      album.$delete(function() {
+        $state.go($state.current, {}, { reload: true });
+      });
+    };
   })
 
   .controller('AlbumsViewCtrl', function ($scope, $stateParams, AlbumsService) {

@@ -1,11 +1,39 @@
-<div>
-
+<div class="container-fluid">
   <h3>All Photos</h3>
+  <div class="row">
 
-  <div ng-repeat="photo in photos track by $index">
-    <p>{{ photo.title }} - {{ photo.filePath }} - {{ photo.createdDate }}</p>
-    <a class="btn btn-primary" ui-sref="viewPhoto({ id: photo.id })">View</a>
-    <a class="btn btn-danger" ng-click="deletePhoto(photo)">Delete</a>
+    <div class="col-md-3" ng-repeat="photo in photos track by $index">
+      <img ng-src="images/{{ photo.filePath }}" alt="{{ photo.title }}" class="img-rounded img-thumbnail" />
+      <p><strong>Title:</strong> {{ photo.title }}</p>
+      <p><strong>Created:</strong> {{ photo.createdDate | date: 'MMM d, yyyy' }}</p>
+      <a class="btn btn-primary" ui-sref="viewPhoto({ id: photo.id })">View</a>
+      <button type="button" class="btn btn-danger" data-toggle="modal" ng-attr-data-target="#photoModal{{$index}}">Delete</button>
+
+      <!-- Modal -->
+      <div class="modal fade" ng-attr-id="photoModal{{$index}}" tabindex="-1" role="dialog" ng-attr-aria-labelledby="photoLabel{{$index}}" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Cancel"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" ng-attr-id="photoLabel{{$index}}">Confirm Delete</h4>
+            </div>
+            <div class="modal-body">
+              Are you sure you want to delete {{ photo.title }}?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deletePhoto(photo)">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <a ui-sref="newPhoto" class="btn-success btn-lg nodecoration">Add New Photo</a>
+    </div>
   </div>
 
 </div>

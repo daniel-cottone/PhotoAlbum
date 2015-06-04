@@ -1,11 +1,38 @@
-<div>
-
+<div class="container-fluid">
   <h3>All Albums</h3>
+  <div class="row">
 
-  <div ng-repeat="album in albums track by $index">
-    <p>{{ album.title }} - {{ album.createdDate }}</p>
-    <a class="btn btn-primary" ui-sref="viewAlbum({ id: album.id })">View</a>
-    <a class="btn btn-danger" ng-click="deleteAlbum(album)">Delete</a>
+    <div class="col-md-3" ng-repeat="album in albums track by $index">
+      <p><strong>Title:</strong> {{ album.title }}</p>
+      <p><strong>Created:</strong> {{ album.createdDate | date: 'MMM d, yyyy' }}</p>
+      <a class="btn btn-primary" ui-sref="viewAlbum({ id: album.id })">View</a>
+      <button type="button" class="btn btn-danger" data-toggle="modal" ng-attr-data-target="#albumModal{{$index}}">Delete</button>
+
+      <!-- Modal -->
+      <div class="modal fade" ng-attr-id="albumModal{{$index}}" tabindex="-1" role="dialog" ng-attr-aria-labelledby="albumLabel{{$index}}" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Cancel"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" ng-attr-id="albumLabel{{$index}}">Confirm Delete</h4>
+            </div>
+            <div class="modal-body">
+              Are you sure you want to delete {{ album.title }}?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteAlbum(album)">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <a ui-sref="newAlbum" class="btn-success btn-lg nodecoration">Add New Album</a>
+    </div>
   </div>
 
 </div>

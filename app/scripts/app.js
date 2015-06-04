@@ -13,29 +13,62 @@ angular
     'ngAnimate',
     'ngCookies',
     'ngResource',
-    'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'ui.router'
   ])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
+  .config(function ($stateProvider) {
+    $stateProvider
+
+      // Main Page
+      .state('main', {
+        url: '/',
+        templateUrl: 'views/main/index.html',
         controller: 'MainCtrl'
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
+
+      // Albums
+      .state('listAlbums', {
+        url: '/albums',
+        templateUrl: 'views/albums/list.html',
+        controller: 'AlbumsListCtrl'
       })
-      .when('/albums', {
-        templateUrl: 'views/albums.html',
-        controller: 'AlbumsCtrl'
+      .state('viewAlbum', {
+        url: '/albums/:id/view',
+        templateUrl: 'views/albums/view.html',
+        controller: 'AlbumsViewCtrl'
       })
-      .when('/photos', {
-        templateUrl: 'views/photos.html',
-        controller: 'PhotosCtrl'
+      .state('editAlbum', {
+        url: '/albums/:id/edit',
+        templateUrl: 'views/albums/edit.html',
+        controller: 'AlbumsEditCtrl'
       })
-      .otherwise({
-        redirectTo: '/'
+      .state('newAlbum', {
+        url: '/albums/new',
+        templateUrl: 'views/albums/new.html',
+        controller: 'AlbumsNewCtrl'
+      })
+
+      // Photos
+      .state('listPhotos', {
+        url: '/photos',
+        templateUrl: 'views/photos/list.html',
+        controller: 'PhotosListCtrl'
+      }).state('viewPhoto', {
+        url: '/photos/:id/view',
+        templateUrl: 'views/photos/view.html',
+        controller: 'PhotosViewCtrl'
+      }).state('editPhotos', {
+        url: '/photos/:id/edit',
+        templateUrl: 'views/photos/edit.html',
+        controller: 'PhotosEditCtrl'
+      })
+      .state('newPhotos', {
+        url: '/photos/new',
+        templateUrl: 'views/photos/new.html',
+        controller: 'PhotosNewCtrl'
       });
+  })
+  .run(function ($state) {
+    $state.go('main');
   });

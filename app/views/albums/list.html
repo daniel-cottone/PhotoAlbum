@@ -1,0 +1,11 @@
+<div>
+
+  <h3>All Albums</h3>
+
+  <div ng-repeat="album in albums track by $index">
+    <p>{{ album.title }} - {{ album.createdDate }}</p>
+    <a class="btn btn-primary" ui-sref="viewAlbum({ id: album.id })">View</a>
+    <a class="btn btn-danger" ng-click="deleteAlbum(album)">Delete</a>
+  </div>
+
+</div>

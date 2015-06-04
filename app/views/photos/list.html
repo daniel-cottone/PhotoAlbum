@@ -1,0 +1,11 @@
+<div>
+
+  <h3>All Photos</h3>
+
+  <div ng-repeat="photo in photos track by $index">
+    <p>{{ photo.title }} - {{ photo.filePath }} - {{ photo.createdDate }}</p>
+    <a class="btn btn-primary" ui-sref="viewPhoto({ id: photo.id })">View</a>
+    <a class="btn btn-danger" ng-click="deletePhoto(photo)">Delete</a>
+  </div>
+
+</div>

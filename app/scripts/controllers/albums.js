@@ -35,7 +35,7 @@ angular.module('photoAlbumApp')
   .controller('AlbumsViewCtrl', function ($scope, $state, $stateParams, AlbumsService, PhotosService) {
 
     // Promise chain to resolve album and cover photo
-    AlbumsService.get({ id: $stateParams.id}, function (data) {
+    AlbumsService.get({ id: $stateParams.id }, function (data) {
       $scope.album = data;
     }).$promise
     .then(function () {
@@ -48,6 +48,11 @@ angular.module('photoAlbumApp')
 
   .controller('AlbumsEditCtrl', function ($scope, $state, $stateParams, AlbumsService) {
 
+    // Promise chain to resolve the album
+    AlbumsService.get({ id: $stateParams.id }, function (data) {
+      $scope.album = data;
+    });
+
     // Update album and go to list view
     $scope.updateAlbum = function() {
       $scope.album.$update(function() {
@@ -55,24 +60,17 @@ angular.module('photoAlbumApp')
       });
     };
 
-    // Get specified album
-    $scope.loadAlbum = function() {
-      $scope.album = AlbumsService.get({ id: $stateParams.id });
-    };
-
-    $scope.loadAlbum();
-
   })
 
   .controller('AlbumsNewCtrl', function ($scope, $state, $stateParams, AlbumsService) {
 
     $scope.album = new AlbumsService();
 
-    // Add an album and go to list view
+    // Function to add album and go to list view
     $scope.addAlbum = function() {
       $scope.album.$save(function() {
         $state.go('listAlbums');
       });
     };
-    
+
   });

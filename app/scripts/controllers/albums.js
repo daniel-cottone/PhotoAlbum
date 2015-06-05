@@ -42,6 +42,10 @@ angular.module('photoAlbumApp')
       return PhotosService.get({ id: $scope.album.coverPhotoId }, function (data) {
         $scope.coverPhoto = data;
       }).$promise;
+    }).then(function () {
+      return PhotosService.query({ albumId: $scope.album.id }, function (data) {
+        $scope.photos = data;
+      }).$promise;
     });
 
   })

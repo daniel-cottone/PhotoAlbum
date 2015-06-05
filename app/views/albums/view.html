@@ -65,8 +65,10 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="createPhoto()">Save</button>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="createPhoto()">Save</button>
+          </div>
         </div>
       </div>
     </div>
@@ -79,5 +81,5 @@
   <button type="button" class="btn btn-success nodecoration" data-toggle="modal" data-target="#addPhotoModal">
     <span class="glyphicon glyphicon-plus"></span> Add Photo
   </button>
-  <a class="btn btn-warning" ui-sref="editAlbum({ id: album.id })">Edit</a>
+  <a class="btn btn-default" ui-sref="editAlbum({ id: album.id })">Edit</a>
 </div>

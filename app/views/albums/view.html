@@ -2,6 +2,8 @@
 
 <div class="row">
   <div class="col-md-2" ng-repeat="photo in photos track by $index">
+
+    <!-- Thumbnail -->
     <div class="thumbnail">
       <img ng-src="images/{{ photo.filePath }}" alt="{{ photo.title }}" class="img-rounded" />
       <div class="caption">
@@ -9,10 +11,34 @@
         <p><strong>Created:</strong> {{ photo.createdDate | date: 'MMM d, yyyy' }}</p>
         <a class="btn btn-primary btn-xs" ui-sref="viewPhoto({ id: photo.id })">View</a>
         <a class="btn btn-warning btn-xs" ui-sref="editPhoto({ id: photo.id })">Edit</a>
-        <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" ng-attr-data-target="#photoModal{{$index}}">Delete</button>
+        <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" ng-attr-data-target="#deletePhotoModal{{$index}}">Delete</button>
       </div>
     </div>
+
+    <!-- Delete photo modal -->
+    <div class="modal fade" ng-attr-id="deletePhotoModal{{$index}}" tabindex="-1" role="dialog" ng-attr-aria-labelledby="deletePhotoLabel{{$index}}" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Cancel"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" ng-attr-id="deletePhotoLabel{{$index}}">Confirm Delete</h4>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to delete {{ photo.title }}?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deletePhoto(photo)">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
+
+  <!-- Add photo modal -->
+  
+
 </div>
 
 <!-- Button group -->

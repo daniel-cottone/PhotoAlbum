@@ -11,6 +11,9 @@ angular.module('photoAlbumApp')
 
   .controller('AlbumsListCtrl', function ($scope, $state, $stateParams, AlbumsService, PhotosService) {
 
+    // New album
+    $scope.album = new AlbumsService();
+
     // Promise chain to resolve albums and associaed cover photos
     AlbumsService.query(function (data) {
       $scope.albums = data;
@@ -23,9 +26,16 @@ angular.module('photoAlbumApp')
       });
     });
 
-    // Function to delete album
+    // Function to delete album and refresh current view
     $scope.deleteAlbum = function(album) {
       album.$delete(function() {
+        $state.go($state.current, {}, { reload: true });
+      });
+    };
+
+    // Function to add album and refresh current view
+    $scope.addAlbum = function() {
+      $scope.album.$save(function() {
         $state.go($state.current, {}, { reload: true });
       });
     };

@@ -2,6 +2,7 @@
 
   <h3>Details for {{ album.title }}</h3>
 
+  <img ng-src="images/{{ coverPhoto.filePath }}" alt="{{ album.title }}" class="img-rounded img-thumbnail" />
   <p><strong>Title:</strong> {{ album.title }}</p>
   <p><strong>Created:</strong> {{ album.createdDate | date: 'MMM d, yyyy' }}</p>
   <p><strong>Cover photo:</strong> {{ album.coverPhotoId }}</p>

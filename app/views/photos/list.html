@@ -2,12 +2,17 @@
   <h3>All Photos</h3>
   <div class="row">
 
-    <div class="col-md-3" ng-repeat="photo in photos track by $index">
-      <img ng-src="images/{{ photo.filePath }}" alt="{{ photo.title }}" class="img-rounded img-thumbnail" />
-      <p><strong>Title:</strong> {{ photo.title }}</p>
-      <p><strong>Created:</strong> {{ photo.createdDate | date: 'MMM d, yyyy' }}</p>
-      <a class="btn btn-primary" ui-sref="viewPhoto({ id: photo.id })">View</a>
-      <button type="button" class="btn btn-danger" data-toggle="modal" ng-attr-data-target="#photoModal{{$index}}">Delete</button>
+    <div class="col-md-4" ng-repeat="photo in photos track by $index">
+      <div class="thumbnail">
+        <img ng-src="images/{{ photo.filePath }}" alt="{{ photo.title }}" class="img-rounded" />
+        <div class="caption">
+          <h3>{{ photo.title }}</h3>
+          <p><strong>Created:</strong> {{ photo.createdDate | date: 'MMM d, yyyy' }}</p>
+          <a class="btn btn-primary btn-xs" ui-sref="viewPhoto({ id: photo.id })">View</a>
+          <a class="btn btn-warning btn-xs" ui-sref="editPhoto({ id: photo.id })">Edit</a>
+          <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" ng-attr-data-target="#photoModal{{$index}}">Delete</button>
+        </div>
+      </div>
 
       <!-- Modal -->
       <div class="modal fade" ng-attr-id="photoModal{{$index}}" tabindex="-1" role="dialog" ng-attr-aria-labelledby="photoLabel{{$index}}" aria-hidden="true">
@@ -32,7 +37,7 @@
 
   <div class="row">
     <div class="col-md-4">
-      <a ui-sref="newPhoto" class="btn-success btn-lg nodecoration">Add New Photo</a>
+      <a ui-sref="newPhoto" class="btn-success btn-lg nodecoration"><span class="glyphicon glyphicon-plus"></span> Add New Photo</a>
     </div>
   </div>
 

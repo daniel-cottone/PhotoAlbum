@@ -1,11 +1,10 @@
-<h3>All Albums</h3>
 <div class="row">
 
-  <div class="col-md-4" ng-repeat="album in albums track by $index">
+  <div class="col-md-2" ng-repeat="album in albums track by $index">
     <div class="thumbnail">
       <img ng-src="images/{{ album.coverPhoto.filePath }}" alt="{{ album.title }}" class="img-rounded" />
       <div class="caption">
-        <h3>{{ album.title }}</h3>
+        <h4>{{ album.title }}</h4>
         <p><strong>Created:</strong> {{ album.createdDate | date: 'MMM d, yyyy' }}</p>
         <a class="btn btn-primary btn-xs" ui-sref="viewAlbum({ id: album.id })">View</a>
         <a class="btn btn-warning btn-xs" ui-sref="editAlbum({ id: album.id })">Edit</a>
@@ -34,8 +33,7 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-md-12">
-    <a ui-sref="newAlbum" class="btn-success btn-lg nodecoration">Add New Album</a>
-  </div>
+<!-- Button group -->
+<div class="btn-group" role="group">
+  <a ui-sref="newAlbum" class="btn btn-success nodecoration"><span class="glyphicon glyphicon-plus"></span> New Album</a>
 </div>

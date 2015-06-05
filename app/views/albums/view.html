@@ -1,24 +1,22 @@
-<h3>Details for {{ album.title }}</h3>
-
-<img ng-src="images/{{ coverPhoto.filePath }}" alt="{{ album.title }}" class="img-rounded img-thumbnail" />
-<p><strong>Title:</strong> {{ album.title }}</p>
-<p><strong>Created:</strong> {{ album.createdDate | date: 'MMM d, yyyy' }}</p>
+<h3>{{ album.title }}</h3>
 
 <div class="row">
-  <div class="col-md-4" ng-repeat="photo in photos track by $index">
+  <div class="col-md-2" ng-repeat="photo in photos track by $index">
     <div class="thumbnail">
       <img ng-src="images/{{ photo.filePath }}" alt="{{ photo.title }}" class="img-rounded" />
       <div class="caption">
-        <h3>{{ photo.title }}</h3>
+        <h4>{{ photo.title }}</h4>
         <p><strong>Created:</strong> {{ photo.createdDate | date: 'MMM d, yyyy' }}</p>
         <a class="btn btn-primary btn-xs" ui-sref="viewPhoto({ id: photo.id })">View</a>
         <a class="btn btn-warning btn-xs" ui-sref="editPhoto({ id: photo.id })">Edit</a>
         <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" ng-attr-data-target="#photoModal{{$index}}">Delete</button>
       </div>
     </div>
-  </div>  
+  </div>
 </div>
 
-<div>
-  <a class="btn btn-primary" ui-sref="editAlbum({ id: album.id })">Edit</a>
+<!-- Button group -->
+<div class="btn-group" role="group">
+  <a class="btn btn-success" ui-sref="newPhoto()"><span class="glyphicon glyphicon-plus"></span> Add Photo</a>
+  <a class="btn btn-warning" ui-sref="editAlbum({ id: album.id })">Edit</a>
 </div>

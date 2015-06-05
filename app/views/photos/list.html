@@ -1,7 +1,7 @@
 <h3>All Photos</h3>
 <div class="row">
 
-  <div class="col-md-4" ng-repeat="photo in photos track by $index">
+  <div class="col-md-2" ng-repeat="photo in photos track by $index">
     <div class="thumbnail">
       <img ng-src="images/{{ photo.filePath }}" alt="{{ photo.title }}" class="img-rounded" />
       <div class="caption">

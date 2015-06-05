@@ -34,15 +34,11 @@ angular.module('photoAlbumApp')
 
   .controller('AlbumsViewCtrl', function ($scope, $state, $stateParams, AlbumsService, PhotosService) {
 
-    // Promise chain to resolve album, cover photo, and photos in album
+    // Promise chain to resolve album and photos in album
     AlbumsService.get({ id: $stateParams.id }, function (data) {
       $scope.album = data;
     }).$promise
     .then(function () {
-      return PhotosService.get({ id: $scope.album.coverPhotoId }, function (data) {
-        $scope.coverPhoto = data;
-      }).$promise;
-    }).then(function () {
       return PhotosService.query({ albumId: $scope.album.id }, function (data) {
         $scope.photos = data;
       }).$promise;
@@ -50,11 +46,16 @@ angular.module('photoAlbumApp')
 
   })
 
-  .controller('AlbumsEditCtrl', function ($scope, $state, $stateParams, AlbumsService) {
+  .controller('AlbumsEditCtrl', function ($scope, $state, $stateParams, AlbumsService, PhotosService) {
 
-    // Promise chain to resolve the album
+    // Promise chain to resolve the album and cover photo
     AlbumsService.get({ id: $stateParams.id }, function (data) {
       $scope.album = data;
+    }).$promise
+    .then(function () {
+      return PhotosService.get({ id: $scope.album.coverPhotoId }, function (data) {
+        $scope.coverPhoto = data;
+      }).$promise;
     });
 
     // Update album and go to list view

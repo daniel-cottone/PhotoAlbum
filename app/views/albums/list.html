@@ -1,6 +1,8 @@
 <div class="row">
 
   <div class="col-md-2" ng-repeat="album in albums track by $index">
+
+    <!-- Thumbnail -->
     <div class="thumbnail">
       <img ng-src="images/{{ album.coverPhoto.filePath }}" alt="{{ album.title }}" class="img-rounded" />
       <div class="caption">
@@ -8,17 +10,17 @@
         <p><strong>Created:</strong> {{ album.createdDate | date: 'MMM d, yyyy' }}</p>
         <a class="btn btn-primary btn-xs" ui-sref="viewAlbum({ id: album.id })">View</a>
         <a class="btn btn-warning btn-xs" ui-sref="editAlbum({ id: album.id })">Edit</a>
-        <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" ng-attr-data-target="#albumModal{{$index}}">Delete</button>
+        <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" ng-attr-data-target="#deleteAlbumModal{{$index}}">Delete</button>
       </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" ng-attr-id="albumModal{{$index}}" tabindex="-1" role="dialog" ng-attr-aria-labelledby="albumLabel{{$index}}" aria-hidden="true">
+    <!-- Delete album modal -->
+    <div class="modal fade" ng-attr-id="deleteAlbumModal{{$index}}" tabindex="-1" role="dialog" ng-attr-aria-labelledby="deleteAlbumLabel{{$index}}" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Cancel"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" ng-attr-id="albumLabel{{$index}}">Confirm Delete</h4>
+            <h4 class="modal-title" ng-attr-id="deleteAlbumLabel{{$index}}">Confirm Delete</h4>
           </div>
           <div class="modal-body">
             Are you sure you want to delete {{ album.title }}?
@@ -31,9 +33,42 @@
       </div>
     </div>
   </div>
+
+  <!-- Add album modal -->
+  <div class="modal fade" id="addAlbumModal" tabindex="-1" role="dialog" aria-labelledby="addAlbumLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Cancel"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="addAlbumLabel">New Album</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="title" class="col-sm-2 control-label">Title</label>
+            <div class="col-sm-10">
+              <input type="text" ng-model="album.title" class="form-control" id="title" placeholder="Album title here" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="coverPhotoId" class="col-sm-2 control-label">Cover Photo Id</label>
+            <div class="col-sm-10">
+              <input type="text" ng-model="album.coverPhotoId" class="form-control" id="coverPhotoId" />
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="addAlbum()">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <!-- Button group -->
 <div class="btn-group" role="group">
-  <a ui-sref="newAlbum" class="btn btn-success nodecoration"><span class="glyphicon glyphicon-plus"></span> New Album</a>
+  <button type="button" class="btn btn-success nodecoration" data-toggle="modal" data-target="#addAlbumModal">
+    <span class="glyphicon glyphicon-plus"></span> New Album
+  </button>
 </div>

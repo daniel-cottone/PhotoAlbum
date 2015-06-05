@@ -17,9 +17,9 @@ angular.module('photoAlbumApp')
     }).$promise
     .then(function () {
       $scope.albums.forEach(function (album) {
-        PhotosService.get({ id: album.coverPhotoId }, function (data) {
+        return PhotosService.get({ id: album.coverPhotoId }, function (data) {
           album.coverPhoto = data;
-        });
+        }).$promise;
       });
     });
 
@@ -34,7 +34,7 @@ angular.module('photoAlbumApp')
 
   .controller('AlbumsViewCtrl', function ($scope, $state, $stateParams, AlbumsService, PhotosService) {
 
-    // Promise chain to resolve album and cover photo
+    // Promise chain to resolve album, cover photo, and photos in album
     AlbumsService.get({ id: $stateParams.id }, function (data) {
       $scope.album = data;
     }).$promise

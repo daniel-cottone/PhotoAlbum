@@ -1,7 +1,7 @@
-# photo-album
+# PhotoAlbum
 
-This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
-version 0.11.1.
+## About
+This is an example  web front-end developed for the RESTful [PhotoAlbum-api](https://github.com/brahalla/PhotoAlbum-api) written in AngularJS.
 
 ## Build & development
 

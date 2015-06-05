@@ -1,14 +1,10 @@
-<div class="container-fluid">
+<h3>Details for {{ album.title }}</h3>
 
-  <h3>Details for {{ album.title }}</h3>
+<img ng-src="images/{{ coverPhoto.filePath }}" alt="{{ album.title }}" class="img-rounded img-thumbnail" />
+<p><strong>Title:</strong> {{ album.title }}</p>
+<p><strong>Created:</strong> {{ album.createdDate | date: 'MMM d, yyyy' }}</p>
+<p><strong>Cover photo:</strong> {{ album.coverPhotoId }}</p>
 
-  <img ng-src="images/{{ coverPhoto.filePath }}" alt="{{ album.title }}" class="img-rounded img-thumbnail" />
-  <p><strong>Title:</strong> {{ album.title }}</p>
-  <p><strong>Created:</strong> {{ album.createdDate | date: 'MMM d, yyyy' }}</p>
-  <p><strong>Cover photo:</strong> {{ album.coverPhotoId }}</p>
-
-  <div>
-    <a class="btn btn-primary" ui-sref="editAlbum({ id: album.id })">Edit</a>
-  </div>
-
+<div>
+  <a class="btn btn-primary" ui-sref="editAlbum({ id: album.id })">Edit</a>
 </div>

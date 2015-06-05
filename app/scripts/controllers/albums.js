@@ -12,7 +12,7 @@ angular.module('photoAlbumApp')
   .controller('AlbumsListCtrl', function ($scope, $state, $stateParams, AlbumsService, PhotosService) {
 
     // New album
-    $scope.album = new AlbumsService();
+    $scope.newAlbum = new AlbumsService();
 
     // Promise chain to resolve albums and associaed cover photos
     AlbumsService.query(function (data) {
@@ -35,7 +35,7 @@ angular.module('photoAlbumApp')
 
     // Function to add album and refresh current view
     $scope.addAlbum = function() {
-      $scope.album.$save(function() {
+      $scope.newAlbum.$save(function() {
         $state.go($state.current, {}, { reload: true });
       });
     };
@@ -43,6 +43,9 @@ angular.module('photoAlbumApp')
   })
 
   .controller('AlbumsViewCtrl', function ($scope, $state, $stateParams, AlbumsService, PhotosService) {
+
+    // New photo
+    $scope.newPhoto = new PhotosService();
 
     // Promise chain to resolve album and photos in album
     AlbumsService.get({ id: $stateParams.id }, function (data) {
@@ -53,6 +56,20 @@ angular.module('photoAlbumApp')
         $scope.photos = data;
       }).$promise;
     });
+
+    // Function to delete photos
+    $scope.deletePhoto = function(photo) {
+      photo.$delete(function() {
+        $state.go($state.current, {}, { reload: true });
+      });
+    };
+
+    // Function to add photo and refresh current view
+    $scope.addPhoto = function() {
+      $scope.newPhoto.$save(function() {
+        $state.go($state.current, {}, { reload: true });
+      });
+    };
 
   })
 

@@ -10,6 +10,8 @@
 angular.module('photoAlbumApp')
 
   .controller('AlbumsListCtrl', function ($scope, $state, $stateParams, AlbumsService, PhotosService) {
+
+    // Promise chain to resolve albums and associaed cover photos
     AlbumsService.query(function (data) {
       $scope.albums = data;
     }).$promise
@@ -21,14 +23,18 @@ angular.module('photoAlbumApp')
       });
     });
 
+    // Function to delete album
     $scope.deleteAlbum = function(album) {
       album.$delete(function() {
         $state.go($state.current, {}, { reload: true });
       });
     };
+
   })
 
   .controller('AlbumsViewCtrl', function ($scope, $state, $stateParams, AlbumsService, PhotosService) {
+
+    // Promise chain to resolve album and cover photo
     AlbumsService.get({ id: $stateParams.id}, function (data) {
       $scope.album = data;
     }).$promise
@@ -37,28 +43,36 @@ angular.module('photoAlbumApp')
         $scope.coverPhoto = data;
       }).$promise;
     });
+
   })
 
   .controller('AlbumsEditCtrl', function ($scope, $state, $stateParams, AlbumsService) {
+
+    // Update album and go to list view
     $scope.updateAlbum = function() {
       $scope.album.$update(function() {
         $state.go('listAlbums');
       });
     };
 
+    // Get specified album
     $scope.loadAlbum = function() {
       $scope.album = AlbumsService.get({ id: $stateParams.id });
     };
 
     $scope.loadAlbum();
+
   })
 
   .controller('AlbumsNewCtrl', function ($scope, $state, $stateParams, AlbumsService) {
+
     $scope.album = new AlbumsService();
 
+    // Add an album and go to list view
     $scope.addAlbum = function() {
       $scope.album.$save(function() {
         $state.go('listAlbums');
       });
     };
+    
   });

@@ -9,8 +9,17 @@
  */
 angular.module('photoAlbumApp')
 
-  .controller('AlbumsListCtrl', function ($scope, $state, $stateParams, AlbumsService) {
-    $scope.albums = AlbumsService.query();
+  .controller('AlbumsListCtrl', function ($scope, $state, $stateParams, AlbumsService, PhotosService) {
+    AlbumsService.query(function (data) {
+      $scope.albums = data;
+    }).$promise
+    .then(function () {
+      $scope.albums.forEach(function (album) {
+        PhotosService.get({ id: album.coverPhotoId }, function (data) {
+          album.coverPhoto = data;
+        });
+      });
+    });
 
     $scope.deleteAlbum = function(album) {
       album.$delete(function() {
@@ -19,8 +28,15 @@ angular.module('photoAlbumApp')
     };
   })
 
-  .controller('AlbumsViewCtrl', function ($scope, $stateParams, AlbumsService) {
-    $scope.album = AlbumsService.get({ id: $stateParams.id });
+  .controller('AlbumsViewCtrl', function ($scope, $state, $stateParams, AlbumsService, PhotosService) {
+    AlbumsService.get({ id: $stateParams.id}, function (data) {
+      $scope.album = data;
+    }).$promise
+    .then(function () {
+      return PhotosService.get({ id: $scope.album.coverPhotoId }, function (data) {
+        $scope.coverPhoto = data;
+      }).$promise;
+    });
   })
 
   .controller('AlbumsEditCtrl', function ($scope, $state, $stateParams, AlbumsService) {

@@ -24,16 +24,16 @@ angular.module('photoAlbumApp')
       }).$promise;
     });
 
-    // Function to delete photos
-    $scope.deletePhoto = function(photo) {
-      photo.$delete(function() {
+    // Function to add photo and refresh current view
+    $scope.createPhoto = function() {
+      $scope.newPhoto.$save(function() {
         $state.go($state.current, {}, { reload: true });
       });
     };
 
-    // Function to add photo and refresh current view
-    $scope.addPhoto = function() {
-      $scope.newPhoto.$save(function() {
+    // Function to delete photos
+    $scope.deletePhoto = function(photo) {
+      photo.$delete(function() {
         $state.go($state.current, {}, { reload: true });
       });
     };

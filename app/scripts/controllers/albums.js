@@ -68,6 +68,7 @@ angular.module('photoAlbumApp')
 
   .controller('AlbumsNewCtrl', function ($scope, $state, $stateParams, AlbumsService) {
 
+    // New album
     $scope.album = new AlbumsService();
 
     // Function to add album and go to list view

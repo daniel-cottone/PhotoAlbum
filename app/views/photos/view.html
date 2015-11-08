@@ -1,6 +1,6 @@
 <h3>Details for {{ photo.title }}</h3>
 
-<img ng-src="images/{{ photo.filePath }}" alt="{{ photo.title }}" class="img-rounded" />
+<img ng-src="http://localhost:8080/files/{{ photo.filePath }}" alt="{{ photo.title }}" class="img-rounded" />
 <p><strong>Title:</strong> {{ photo.title }}</p>
 <p><strong>Created:</strong> {{ photo.createdDate | date: 'MMM d, yyyy' }}</p>
 <p><strong>Album:</strong> {{ photo.albumId }}</p>

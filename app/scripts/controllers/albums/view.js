@@ -19,7 +19,7 @@ angular.module('photoAlbumApp')
       $scope.album = data;
     }).$promise
     .then(function () {
-      return PhotosService.query({ albumId: $scope.album.id }, function (data) {
+      return PhotosService.query({ search: 'albumId:' + $scope.album.id }, function (data) {
         $scope.photos = data;
       }).$promise;
     });

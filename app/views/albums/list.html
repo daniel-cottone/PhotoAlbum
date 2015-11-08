@@ -4,7 +4,7 @@
 
     <!-- Thumbnail -->
     <div class="thumbnail">
-      <img ng-src="images/{{ album.coverPhoto.filePath }}" alt="{{ album.title }}" class="img-rounded" />
+      <img ng-src="http://localhost:8080/files/{{ album.coverPhoto.filePath }}" alt="{{ album.title }}" class="img-rounded" />
       <div class="caption">
         <h4>{{ album.title }}</h4>
         <p><strong>Created:</strong> {{ album.createdDate | date: 'MMM d, yyyy' }}</p>

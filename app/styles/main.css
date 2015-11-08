@@ -59,6 +59,12 @@ body {
   margin-top: 28px;
 }
 
+/* Thumbnail height */
+.thumbnail img {
+  min-height: 150px;
+  height: 150px;
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   .container {
